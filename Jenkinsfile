@@ -23,6 +23,12 @@ pipeline {
             }
         }
         
+        stage('Install PM2') {
+            steps {
+                sh 'npm install pm2 -g'
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
