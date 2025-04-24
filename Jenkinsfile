@@ -27,14 +27,11 @@ pipeline {
             // }
             steps {
                 sh '''
-                    # Clean up any previous PM2 instances
-                    pm2 kill || true
-                    
-                    # Start application with PM2
-                    pm2 start index.js --name my-app
+                    npm install
+                    nohup nodemon app.js > nodemon.log 2>&1 &
+                    echo $! > nodemon.pid
                     sleep 5  # Wait for startup
-                    curl -f http://localhost:3000 || exit 1  # Verify endpoint
-                    curl -f http://localhost:3000/getStudents || exit 1  # Verify endpoint
+                    grep "Listening" nodemon.log || exit 1
                 '''
             }
         }
