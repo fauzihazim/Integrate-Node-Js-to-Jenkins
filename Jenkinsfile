@@ -10,6 +10,11 @@ pipeline {
     }
     
     stages {
+        stage('Stop') {
+            steps {
+                sh 'pm2 delete 0'
+            }
+        }
         // stage('Checkout') {
         //     steps {
         //         git branch: 'main', url: 'https://github.com/yourusername/your-repo.git'
@@ -22,7 +27,7 @@ pipeline {
                 sh 'npm --version'
             }
         }
-        
+
         stage('Install PM2') {
             steps {
                 sh 'npm install pm2 -g'
