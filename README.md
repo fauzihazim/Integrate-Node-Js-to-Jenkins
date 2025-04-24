@@ -13,7 +13,6 @@ Make sure that you using **node v22.14.0** to prevent the <ins>compatibility iss
 ```bash
 git clone https://github.com/fauzihazim/Integrate-Node-Js-to-Jenkins.git
 ```
-
 3. Install Dependency
 ##### Using Npm
 ```bash
