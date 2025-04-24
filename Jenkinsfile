@@ -10,36 +10,42 @@ pipeline {
     }
     
     stages {
-        // stage('Checkout') {
+        stage('Stop Project') {
+            steps {
+                sh 'pkill -f nodemon'
+            }
+        }
+
+        // // stage('Checkout') {
+        // //     steps {
+        // //         git branch: 'main', url: 'https://github.com/yourusername/your-repo.git'
+        // //     }
+        // // }
+
+        // stage('Check Node and NPM version') {
         //     steps {
-        //         git branch: 'main', url: 'https://github.com/yourusername/your-repo.git'
+        //         sh 'node --version'
+        //         sh 'npm --version'
         //     }
         // }
-
-        stage('Check Node and NPM version') {
-            steps {
-                sh 'node --version'
-                sh 'npm --version'
-            }
-        }
         
-        stage('Install Dependencies') {
-            steps {
-                sh 'npm install'
-            }
-        }
-        
-        // stage('Test') {
+        // stage('Install Dependencies') {
         //     steps {
-        //         sh 'npm test'
+        //         sh 'npm install'
         //     }
         // }
+        
+        // // stage('Test') {
+        // //     steps {
+        // //         sh 'npm test'
+        // //     }
+        // // }
 
-        stage('Start') {
-            steps {
-                sh 'npm start'
-            }
-        }
+        // stage('Start') {
+        //     steps {
+        //         sh 'npm start'
+        //     }
+        // }
         
         // Add additional stages as needed (build, deploy, etc.)
     }
