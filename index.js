@@ -18,6 +18,6 @@ app.post("/addStudent", addStudent);
 app.put("/editStudent/:id", editStudent);
 app.delete("/deleteStudent/:id", deleteStudent);
 
-app.listen(port, () => {
+app.listen(port, '203.194.114.176', () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
