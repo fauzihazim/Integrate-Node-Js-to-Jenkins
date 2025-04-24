@@ -38,6 +38,19 @@ pipeline {
                 '''
             }
         }
+
+        stage('Find IP Address') {
+            steps {
+                script {
+                    def ipAddress = sh(
+                        script: 'hostname -I | awk \'{print $1}\'',
+                        returnStdout: true
+                    ).trim()
+                    echo "IP Address: ${ipAddress}"
+                }
+            }
+        }
+
     }
     
     post {
