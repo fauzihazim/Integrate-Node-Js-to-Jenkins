@@ -5,12 +5,23 @@ pipeline {
         }
     }
     
+    tools {
+        nodejs 'NodeJS 22.14.0' // Match the name you configured in Global Tools
+    }
+    
     stages {
         // stage('Checkout') {
         //     steps {
         //         git branch: 'main', url: 'https://github.com/yourusername/your-repo.git'
         //     }
         // }
+
+        stage('Check Node and NPM version') {
+            steps {
+                sh 'node --version'
+                sh 'npm --version'
+            }
+        }
         
         stage('Install Dependencies') {
             steps {
