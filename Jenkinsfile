@@ -22,16 +22,8 @@ pipeline {
             }
         }
         stage('Start') {
-            // steps {
-            //     sh 'npm start'
-            // }
             steps {
-                sh '''
-                    npm install
-                    nohup nodemon app.js > nodemon.log 2>&1 &
-                    echo $! > nodemon.pid
-                    sleep 5  # Wait for startup
-                '''
+                sh 'npm start'
             }
         }
 
