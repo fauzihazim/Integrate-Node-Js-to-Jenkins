@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Stop') {
             steps {
-                sh 'pm2 delete 0'
+                sh 'pm2 stop 0'
             }
         }
         stage('Check Node and NPM version') {
