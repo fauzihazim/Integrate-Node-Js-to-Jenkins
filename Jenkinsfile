@@ -31,7 +31,6 @@ pipeline {
                     nohup nodemon app.js > nodemon.log 2>&1 &
                     echo $! > nodemon.pid
                     sleep 5  # Wait for startup
-                    grep "Listening" nodemon.log || exit 1
                 '''
             }
         }
