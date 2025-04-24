@@ -34,6 +34,7 @@ pipeline {
                     pm2 start index.js --name my-app
                     sleep 5  # Wait for startup
                     curl -f http://localhost:3000 || exit 1  # Verify endpoint
+                    curl -f http://localhost:3000/getStudents || exit 1  # Verify endpoint
                 '''
             }
         }
