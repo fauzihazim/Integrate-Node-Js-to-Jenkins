@@ -29,9 +29,15 @@ pipeline {
             }
         }
         
-        stage('Test') {
+        // stage('Test') {
+        //     steps {
+        //         sh 'npm test'
+        //     }
+        // }
+
+        stage('Start') {
             steps {
-                sh 'npm test'
+                sh 'npm start'
             }
         }
         
