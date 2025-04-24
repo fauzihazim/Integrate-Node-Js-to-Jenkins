@@ -33,7 +33,16 @@ pipeline {
     
     post {
         always {
-            // Clean up or notifications
+            echo "Steps is running"
+        }
+        success {
+            echo "Successfully running"
+        }
+        failure {
+            echo "Failed running"
+        }
+        cleanup {
+            echo "Cleaning up"
         }
     }
 }
