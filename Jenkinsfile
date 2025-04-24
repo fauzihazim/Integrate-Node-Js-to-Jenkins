@@ -10,11 +10,6 @@ pipeline {
     }
     
     stages {
-        stage('Stop') {
-            steps {
-                sh 'pm2 stop 0'
-            }
-        }
         stage('Check Node and NPM version') {
             steps {
                 sh 'node --version'
