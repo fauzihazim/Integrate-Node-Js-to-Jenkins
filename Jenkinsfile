@@ -24,7 +24,7 @@ pipeline {
         stage('Start') {
             steps {
                 sh 'node app.js & echo $! > node.pid'
-                sh 'sleep 5; curl -f http://localhost:3000 || exit 1'
+                sh 'sleep 5; curl -f http://203.194.114.176:3000 || exit 1'
             }
         }
 
