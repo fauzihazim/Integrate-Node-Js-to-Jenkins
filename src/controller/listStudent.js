@@ -64,7 +64,7 @@ export const deleteStudent = (req, res) => {
     
     try {
         // students = students.filter(obj => obj.id !== id);
-        let index = students.findIndex(obj => obj.id === 2);
+        let index = students.findIndex(obj => obj.id === id);
         if (index !== -1) {
             students.splice(index, 1);
             console.log("Student ", students);
