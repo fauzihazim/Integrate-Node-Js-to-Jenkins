@@ -1,7 +1,7 @@
 pipeline {
     agent {
         node {
-            label "linux && node22_14_0"
+            label "master"
         }
     }
     
