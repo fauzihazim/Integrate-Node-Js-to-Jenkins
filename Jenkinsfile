@@ -5,10 +5,6 @@ pipeline {
         }
     }
     
-    tools {
-        nodejs 'NodeJS 22.14.0' // Match the name you configured in Global Tools
-    }
-    
     stages {
         // stage('Checkout') {
         //     steps {
