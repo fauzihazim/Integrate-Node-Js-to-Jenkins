@@ -24,7 +24,7 @@ pipeline {
         stage('Start') {
             steps {
                 sh 'npm start'
-                sh 'curl -v http://localhost:3000'
+                sh 'curl -f http://localhost:3000'
             }
         }
 
