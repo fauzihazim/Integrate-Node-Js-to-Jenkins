@@ -15,44 +15,22 @@ pipeline {
                 sh 'pm2 delete 0'
             }
         }
-        // stage('Checkout') {
-        //     steps {
-        //         git branch: 'main', url: 'https://github.com/yourusername/your-repo.git'
-        //     }
-        // }
-
         stage('Check Node and NPM version') {
             steps {
                 sh 'node --version'
                 sh 'npm --version'
             }
         }
-
-        stage('Install PM2') {
-            steps {
-                sh 'npm install pm2 -g'
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
             }
         }
-        
-        // stage('Test') {
-        //     steps {
-        //         sh 'npm test'
-        //     }
-        // }
-
         stage('Start') {
             steps {
                 sh 'npm start'
             }
         }
-        
-        // Add additional stages as needed (build, deploy, etc.)
     }
     
     post {
