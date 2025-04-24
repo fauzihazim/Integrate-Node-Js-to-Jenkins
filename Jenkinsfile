@@ -38,8 +38,8 @@ pipeline {
         failure {
             echo "Failed running"
         }
-        cleanup {
-            echo "Cleaning up"
-        }
+        // cleanup {
+        //     echo "Cleaning up"
+        // }
     }
 }
