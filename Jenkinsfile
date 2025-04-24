@@ -22,8 +22,15 @@ pipeline {
             }
         }
         stage('Start') {
+            // steps {
+            //     sh 'npm start'
+            // }
             steps {
-                sh 'npm start'
+                sh '''
+                    pm2 start index.js --name my-app
+                    sleep 5  # Wait for startup
+                    curl -f http://localhost:3000 || exit 1  # Verify endpoint
+                '''
             }
         }
     }
