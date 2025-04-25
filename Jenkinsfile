@@ -1,15 +1,11 @@
 pipeline {
-    agent {
-        node {
-            label "master"
-        }
-    }
-    
-    tools {
-        nodejs 'NodeJS 22.14.0' // Match the name you configured in Global Tools
-    }
-    
+    agent any
     stages {
+        // stage('Clone Repository') {
+        //     steps {
+        //         git branch: 'main', url: 'https://github.com/your-username/your-repo.git'
+        //     }
+        // }
         stage('Check Node and NPM version') {
             steps {
                 sh 'node --version'
@@ -21,30 +17,20 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('Start') {
+        stage('Run Tests') {
             steps {
-                sh 'node app.js & echo $! > node.pid'
-                sh 'sleep 5; curl -f http://203.194.114.176:3000 || exit 1'
+                sh 'npm test'
             }
         }
-
-        stage('Find IP Address') {
+        stage('Build') {
             steps {
-                script {
-                    def ipAddress = sh(
-                        script: 'hostname -I | awk \'{print $1}\'',
-                        returnStdout: true
-                    ).trim()
-                    echo "IP Address: ${ipAddress}"
-                }
+                sh 'npm run build'
             }
         }
-
-    }
-    
-    post {
-        always {
-            sh 'kill $(cat node.pid) 2>/dev/null || true'
+        stage('Deploy') {
+            steps {
+                sh 'scp -r ./build user@your-server:/path/to/deploy/'
+            }
         }
     }
 }
