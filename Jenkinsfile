@@ -1,5 +1,8 @@
 pipeline {
-    agent any
+    agent {
+        label 'master'
+    }
+
     tools {
         nodejs 'NodeJS 22.14.0' // Configured Node.js version in Jenkins
     }
