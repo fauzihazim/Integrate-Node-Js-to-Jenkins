@@ -30,11 +30,11 @@ pipeline {
             }
         }
 
-        stage('Install PM2') {
-            steps {
-                sh 'npm install -g pm2'
-            }
-        }
+        // stage('Install PM2') {
+        //     steps {
+        //         sh 'npm install -g pm2'
+        //     }
+        // }
 
         stage('Start App with PM2') {
             steps {
