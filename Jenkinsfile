@@ -18,18 +18,18 @@ pipeline{
         
         stage('Install Dependencies'){
             steps {
-                bat 'npm install'
+                sh 'npm install'
             }
         }
          stage('Install pm2'){
             steps {
-                bat 'npm install pm2 -g'
+                sh 'npm install pm2 -g'
             }
         }
         
         stage('Deploy'){
             steps {
-                bat 'pm2 startOrRestart pm2.config.json'
+                sh 'pm2 startOrRestart pm2.config.json'
             }
         }
     }
