@@ -39,7 +39,14 @@ pipeline {
                 scp -r . root@203.194.114.176:/home/user/node-apps/
 
                 # Restart the app using PM2
+                echo "Starting Login..."
                 ssh root@203.194.114.176 << EOF
+                sleep 5
+                echo "Complete Login..."
+                echo "Starting Input Password..."
+                y1RRn@CXKjWF
+                sleep 5
+                echo "Finish Input Password..."
                 cd /home/user/node-apps/
                 pm2 delete all || true    # Stop previous PM2 processes
                 pm2 start index.js --name "backend-app" # Start the app
