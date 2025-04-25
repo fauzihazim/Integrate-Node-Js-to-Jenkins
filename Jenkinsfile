@@ -27,15 +27,32 @@ pipeline {
         //         sh 'npm test'
         //     }
         // }
-        stage('Build') {
+        stage('Start') {
             steps {
                 sh 'npm run build'
             }
         }
         stage('Deploy') {
             steps {
-                sh 'scp -r ./build root@203.194.114.176:/home/user/node-apps/'
+                // Copy project files to the remote server
+                sh '''
+                scp -r . root@203.194.114.176:/home/user/node-apps/
+
+                # Restart the app using PM2
+                ssh root@203.194.114.176 << EOF
+                cd /home/user/node-apps/
+                pm2 delete all || true    # Stop previous PM2 processes
+                pm2 start index.js --name "backend-app" # Start the app
+                pm2 save                  # Save PM2 process for server reboot
+                EOF
+                '''
             }
+        }
+    }
+    post {
+        always {
+            // Cleanup or status notification
+            echo 'Pipeline execution completed!'
         }
     }
 }
