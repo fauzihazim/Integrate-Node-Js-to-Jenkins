@@ -41,6 +41,7 @@ pipeline {
                 sh '''
                     pm2 delete ${APP_NAME} || true
                     pm2 start ${ENTRY_FILE} --name ${APP_NAME}
+                    pwd
                 '''
             }
         }
@@ -71,7 +72,6 @@ pipeline {
     post {
         always {
             echo 'Pipeline execution finished.'
-            sh 'pm2 save'
         }
 
         failure {
