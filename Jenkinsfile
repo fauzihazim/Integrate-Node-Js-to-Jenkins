@@ -21,18 +21,14 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('Start Server') {
+        stage('Start') {
             steps {
-                // Use nohup to keep server running after pipeline ends
-                sh 'nohup npm start > /dev/null 2>&1 &'
-                sh 'sleep 10' // Give server time to start
-            }
-        }
-        
-        stage('Verify Accessibility') {
-            steps {
-                // Check if port is open (alternative to curl)
-                sh 'nc -zv 203.194.114.176 3000 || exit 1'
+                sh '''
+                pm2 delete all || true
+                pm2 start index.js --name "node-app"
+                pm2 save
+                '''
+                sh 'sleep 5; curl -f http://203.194.114.176:3000 || exit 1'
             }
         }
     }
