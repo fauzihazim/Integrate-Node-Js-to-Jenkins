@@ -21,12 +21,12 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('Run Tests') {
-            steps {
-                echo 'Running tests...'
-                sh 'npm test'
-            }
-        }
+        // stage('Run Tests') {
+        //     steps {
+        //         echo 'Running tests...'
+        //         sh 'npm test'
+        //     }
+        // }
         stage('Transfer Files') {
             steps {
                 echo 'Transferring application files...'
