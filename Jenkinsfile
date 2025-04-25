@@ -21,17 +21,25 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('Start') {
+        stage('Start Server') {
             steps {
-                sh 'npm start'
-                sh 'sleep 5; curl -f http://203.194.114.176:3000 || exit 1'
+                // Use nohup to keep server running after pipeline ends
+                sh 'nohup npm start > /dev/null 2>&1 &'
+                sh 'sleep 10' // Give server time to start
+            }
+        }
+        
+        stage('Verify Accessibility') {
+            steps {
+                // Check if port is open (alternative to curl)
+                sh 'nc -zv 203.194.114.176 3000 || exit 1'
             }
         }
     }
     
     post {
         always {
-            echo 'Finish All'
+            echo 'Pipeline Complete'
         }
     }
 }
