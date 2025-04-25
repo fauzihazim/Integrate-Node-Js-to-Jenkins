@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'scp -r ./build user@your-server:/path/to/deploy/'
+                sh 'scp -r ./build root@203.194.114.176:/home/user/node-apps/'
             }
         }
     }
