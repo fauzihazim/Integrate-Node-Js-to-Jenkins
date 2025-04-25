@@ -24,7 +24,7 @@ pipeline {
         stage('Start') {
             steps {
                 sh '''
-                    ssh userName@development-server-ip <<EOF       
+                    ssh root@203.194.114.176 <<EOF       
                     cd /your-project-path 
                     git pull      
                     npm install --production      
