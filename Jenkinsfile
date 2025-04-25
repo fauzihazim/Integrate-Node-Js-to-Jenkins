@@ -26,6 +26,7 @@ pipeline {
                 sh '''
                 pm2 start index.js --name "node-app"
                 pm2 save
+                pm2 startup
                 '''
                 sh 'sleep 5; curl -f http://203.194.114.176:3000 || exit 1'
                 sh 'curl -f http://203.194.114.176:3000/getStudents'
