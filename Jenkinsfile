@@ -45,6 +45,12 @@ pipeline {
             }
         }
 
+        stage('Deploy') {
+            steps {
+                sh 'pm2 startOrRestart pm2.config.json'
+            }
+        }
+
         stage('Health Check') {
             steps {
                 script {
