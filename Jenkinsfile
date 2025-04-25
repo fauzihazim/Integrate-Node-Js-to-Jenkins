@@ -2,6 +2,9 @@ pipeline {
     agent {
         label 'master'
     }
+    tools {
+        nodejs 'NodeJS 22.14.0' // Match the name you configured in Global Tools
+    }
     stages {
         // stage('Clone Repository') {
         //     steps {
