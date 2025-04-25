@@ -2,64 +2,64 @@ pipeline {
     agent {
         label 'master'
     }
-
     tools {
-        nodejs 'NodeJS 22.14.0' // Configured Node.js version in Jenkins
+        nodejs 'NodeJS 22.14.0' // Match the name you configured in Global Tools
     }
-
-    environment {
-        APP_NAME = "my-node-app"
-        DEPLOY_DIR = "/var/www/${APP_NAME}"
-    }
-
     stages {
-        // Automatic code checkout handled by Git plugin
+        // stage('Clone Repository') {
+        //     steps {
+        //         git branch: 'main', url: 'https://github.com/your-username/your-repo.git'
+        //     }
+        // }
+        stage('Check Node and NPM version') {
+            steps {
+                sh 'node --version'
+                sh 'npm --version'
+            }
+        }
         stage('Install Dependencies') {
             steps {
-                sh 'npm ci --only=production'
+                sh 'npm install'
             }
         }
-
-        stage('Build') {
-            when {
-                expression { fileExists('package.json') && 
-                           fileExists('npm-scripts.json') && 
-                           scriptExists('build') }
-            }
+        // stage('Run Tests') {
+        //     steps {
+        //         sh 'npm test'
+        //     }
+        // }
+        // stage('Start') {
+        //     steps {
+        //         sh 'npm run build'
+        //     }
+        // }
+        stage('Deploy') {
             steps {
-                sh 'npm run build'
-            }
-        }
+                // Copy project files to the remote server
+                sh '''
+                scp -r . root@203.194.114.176:/home/user/node-apps/
 
-        stage('Deploy to Production') {
-            steps {
-                sshagent(credentials: ['server-ssh-key']) {
-                    sh """
-                        # Sync files to server
-                        rsync -avz --delete \
-                            --exclude='node_modules' \
-                            --exclude='.git' \
-                            -e "ssh -o StrictHostKeyChecking=no" \
-                            ./ ${DEPLOY_DIR}/
-
-                        # Install and restart
-                        ssh -o StrictHostKeyChecking=no ${DEPLOY_USER}@${DEPLOY_SERVER} \
-                            "cd ${DEPLOY_DIR} && \
-                            npm install --production && \
-                            pm2 restart ${APP_NAME}"
-                    """
-                }
+                # Restart the app using PM2
+                echo "Starting Login..."
+                ssh root@203.194.114.176 << EOF
+                sleep 5
+                echo "Complete Login..."
+                echo "Starting Input Password..."
+                y1RRn@CXKjWF
+                sleep 5
+                echo "Finish Input Password..."
+                cd /home/user/node-apps/
+                pm2 delete all || true    # Stop previous PM2 processes
+                pm2 start index.js --name "backend-app" # Start the app
+                pm2 save                  # Save PM2 process for server reboot
+                EOF
+                '''
             }
         }
     }
-
     post {
         always {
-            cleanWs()
-            slackSend (
-                color: currentBuild.currentResult == 'SUCCESS' ? 'good' : 'danger',
-                message: "${env.JOB_NAME} #${env.BUILD_NUMBER}: ${currentBuild.currentResult}"
-            )
+            // Cleanup or status notification
+            echo 'Pipeline execution completed!'
         }
     }
 }
