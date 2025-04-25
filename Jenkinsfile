@@ -24,8 +24,13 @@ pipeline {
         stage('Start') {
             steps {
                 sh '''
-                pm2 start index.js --name "node-app"
-                pm2 save
+                    ssh userName@development-server-ip <<EOF       
+                    cd /your-project-path 
+                    git pull      
+                    npm install --production      
+                    pm2 restart all
+                    exit      
+                    EOF
                 '''
                 sh 'sleep 5; curl -f http://203.194.114.176:3000 || exit 1'
                 sh 'curl -f http://203.194.114.176:3000/getStudents'
