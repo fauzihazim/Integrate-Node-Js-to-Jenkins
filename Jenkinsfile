@@ -36,15 +36,15 @@ pipeline {
         //     }
         // }
 
-        stage('Start App with PM2') {
-            steps {
-                sh '''
-                    pm2 delete ${APP_NAME} || true
-                    pm2 start ${ENTRY_FILE} --name ${APP_NAME}
-                    pwd
-                '''
-            }
-        }
+        // stage('Start App with PM2') {
+        //     steps {
+        //         sh '''
+        //             pm2 delete ${APP_NAME} || true
+        //             pm2 start ${ENTRY_FILE} --name ${APP_NAME}
+        //             pwd
+        //         '''
+        //     }
+        // }
 
         stage('Deploy') {
             steps {
