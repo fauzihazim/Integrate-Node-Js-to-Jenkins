@@ -24,7 +24,6 @@ pipeline {
         stage('Start') {
             steps {
                 sh '''
-                pm2 delete all || true
                 pm2 start index.js --name "node-app"
                 pm2 save
                 '''
