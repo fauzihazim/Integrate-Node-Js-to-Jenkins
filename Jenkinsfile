@@ -8,13 +8,22 @@ pipeline {
     }
 
     environment {
-        DEPLOY_PATH = "/home/user/node-apps"      // Deployment path on your VPS
-        SERVER_USER = "root"                      // SSH username
-        SERVER_IP = "203.194.114.176"             // VPS IP address
-        APP_NAME = "backend-app"                  // PM2 app name
+        DEPLOY_PATH = "/home/user/node-apps"                        // Deployment path on your VPS
+        SERVER_USER = "root"                                        // SSH username
+        SERVER_IP = "203.194.114.176"                               // VPS IP address
+        APP_NAME = "backend-app"                                    // PM2 app name
+        PUBLIC_KEY = credentials('jenkins-master-credential-id')    // Jenkins ID
     }
 
     stages {
+        stage('Add Public Key to Remote Server') {
+            steps {
+                echo 'Adding public key to the remote server...'
+                sh '''
+                echo "${PUBLIC_KEY}" | ssh ${SERVER_USER}@${SERVER_IP} "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys"
+                '''
+            }
+        }
         stage('Install Dependencies') {
             steps {
                 echo 'Installing dependencies...'
