@@ -32,6 +32,7 @@ pipeline {
                 sh 'curl -f http://203.194.114.176:3000/getStudents'
                 sh 'pm2 list'
                 sh 'curl -f http://203.194.114.176:3000'
+                echo 'Start Stage Complete'
             }
         }
     }
