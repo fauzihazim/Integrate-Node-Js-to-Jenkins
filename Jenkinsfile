@@ -27,11 +27,11 @@ pipeline {
         //         sh 'npm test'
         //     }
         // }
-        stage('Start') {
-            steps {
-                sh 'npm run build'
-            }
-        }
+        // stage('Start') {
+        //     steps {
+        //         sh 'npm run build'
+        //     }
+        // }
         stage('Deploy') {
             steps {
                 // Copy project files to the remote server
