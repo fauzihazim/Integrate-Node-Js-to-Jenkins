@@ -31,7 +31,7 @@ pipeline {
     
     post {
         always {
-            sh 'Finish All'
+            echo 'Finish All'
         }
     }
 }
