@@ -29,12 +29,16 @@ pipeline {
                 pm2 save
                 '''
                 sh 'sleep 5; curl -f http://203.194.114.176:3000 || exit 1'
+                sh 'curl -f http://203.194.114.176:3000/getStudents'
+                sh 'pm2 list'
+                sh 'curl -f http://203.194.114.176:3000'
             }
         }
     }
     
     post {
         always {
+            sh 'curl -f http://203.194.114.176:3000'
             echo 'Pipeline Complete'
         }
     }
