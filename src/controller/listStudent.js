@@ -9,7 +9,7 @@ let students = [
 export const getStudents = (req, res) => {
     try {
         if (students) {
-            res.status(200).json({ status: "success", data: students });
+            res.status(200).json({ status: "success", data: students, Halo: "Halo" });
             return;
         }
         res.status(404).json({ status: "failed", message: "Student is not found" });
