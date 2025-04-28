@@ -38,7 +38,7 @@ pipeline{
                 pm2 delete all || true        # Stop previous processes
                 pm2 start index.js --name "node-app" # Start the application
                 pm2 save                      # Save the PM2 process list
-                pm2 startup sudo env PATH=$PATH:/var/lib/jenkins/tools/jenkins.plugins.nodejs.tools.NodeJSInstallation/NodeJS_22.14.0/bin /var/lib/jenkins/tools/jenkins.plugins.nodejs.tools.NodeJSInstallation/NodeJS_22.14.0/lib/node_modules/pm2/bin/pm2 startup systemd -u jenkins --hp /var/lib/jenkins           # Enable PM2 startup script
+                sudo env PATH=$PATH:/var/lib/jenkins/tools/jenkins.plugins.nodejs.tools.NodeJSInstallation/NodeJS_22.14.0/bin pm2 startup sudo -u jenkins --hp /var/lib/jenkins           # Enable PM2 startup script
                 pm2 save
                 pm2 resurrect
                 '''
