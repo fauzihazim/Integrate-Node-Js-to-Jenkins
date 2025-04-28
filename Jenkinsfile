@@ -18,7 +18,7 @@ pipeline{
         
         stage('Install Dependencies'){
             steps {
-                sh 'npm install'
+                sh 'npm install --production'
             }
         }
         //  stage('Install pm2'){
@@ -45,10 +45,10 @@ pipeline{
         }
 
     }
-    // post {
-    //     always {
-    //         echo 'Restarting application...'
-    //         sh 'pm2 restart node-app'
-    //     }
-    // }
+    post {
+        always {
+            echo 'Restarting application...'
+            sh 'pm2 restart node-app'
+        }
+    }
 }
