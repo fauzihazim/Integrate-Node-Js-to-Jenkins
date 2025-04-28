@@ -45,10 +45,10 @@ pipeline{
         }
 
     }
-    post {
-        always {
-            echo 'Restarting application...'
-            sh 'pm2 restart node-app'
-        }
-    }
+    // post {
+    //     always {
+    //         echo 'Restarting application...'
+    //         sh 'pm2 restart node-app'
+    //     }
+    // }
 }
