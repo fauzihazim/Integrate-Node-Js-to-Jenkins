@@ -36,7 +36,7 @@ pipeline{
             steps {
                 sh '''
                 pm2 delete all || true        # Stop previous processes
-                pm2 start index.js --name "node-app" # Start the application
+                pm2 start index.js --name "node-app" --no-autorestart       # Start the application
                 pm2 save                      # Save the PM2 process list
                 '''
             }
