@@ -44,12 +44,9 @@ pipeline{
 
     }
     post {
-        success {
+        always {
             echo 'Restarting application...'
             sh 'pm2 restart node-app'
-        }
-        always {
-            echo 'Pipeline Completed...'
         }
     }
 }
