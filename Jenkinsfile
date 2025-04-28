@@ -48,7 +48,7 @@ pipeline{
     post {
         always {
             echo 'Restarting application...'
-            sh 'pm2 resurrect'
+            sh 'pm2 startup'
         }
     }
 }
