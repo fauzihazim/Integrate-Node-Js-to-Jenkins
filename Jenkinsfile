@@ -43,9 +43,9 @@ pipeline{
         }
         stage('Setup PM2 Startup') {
             steps {
-                withCredentials([string(credentialsId: 'sudo-password', variable: 'sudo-password')]) {
+                withCredentials([string(credentialsId: 'sudo-password', variable: 'sudo-pass')]) {
                     sh '''
-                    echo "${sudo-password}" | sudo -S env PATH=$PATH:/var/lib/jenkins/tools/jenkins.plugins.nodejs.tools.NodeJSInstallation/NodeJS_22.14.0/bin \
+                    echo "${sudo-pass}" | sudo -S env PATH=$PATH:/var/lib/jenkins/tools/jenkins.plugins.nodejs.tools.NodeJSInstallation/NodeJS_22.14.0/bin \
                     /var/lib/jenkins/tools/jenkins.plugins.nodejs.tools.NodeJSInstallation/NodeJS_22.14.0/lib/node_modules/pm2/bin/pm2 startup systemd -u jenkins --hp /var/lib/jenkins
                     '''
                 }
