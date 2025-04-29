@@ -26,7 +26,7 @@ pipeline{
             steps {
                 sshagent(credentials: ['vps-ssh-key']) {
                     sh '''
-                        ssh -o StrictHostKeyChecking=no root@203.194.114.176 "
+                        ssh -i ~/.ssh/jenkins-deploy-key root@203.194.114.176 "
                         cd /var/www/my-app
                         pm2 restart ecosystem.config.cjs
                         "
