@@ -25,9 +25,14 @@ pipeline{
         stage('Coba Credential Key') {
             steps {
                 sshagent(credentials: ['vps-ssh-key']) {
-                    sh '''
-                        pm2 start ecosystem.config.cjs
-                    '''
+                    sh """
+                        ssh -o StrictHostKeyChecking=no root@203.194.114.176 "
+                        npm install --production
+                        pm2 restart ecosystem.config.cjs || 
+                            pm2 start ecosystem.config.cjs
+                        pm2 save
+                        "
+                    """
                 }
             }
         }
