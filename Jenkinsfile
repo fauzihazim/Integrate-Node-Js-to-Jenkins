@@ -19,7 +19,6 @@ pipeline{
             steps {
                 sh '''
                 pm2 delete all || true        # Stop previous processes
-                pm2 startup && pm2 save
                 '''
             }
         }
