@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: "node-app",
+      name: "node-js app",
       script: "index.js",
       watch: true
     }
