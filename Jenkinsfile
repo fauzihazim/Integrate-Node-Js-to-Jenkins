@@ -27,8 +27,8 @@ pipeline{
                 sshagent(credentials: ['vps-ssh-key']) {
                     sh '''
                         [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
-                        ssh-keyscan -t rsa,dsa example.com >> ~/.ssh/jenkins-deploy-key
-                        ssh user@example.com ...
+                        ssh-keyscan -t rsa,dsa http://203.194.114.176 >> ~/.ssh/jenkins-deploy-key
+                        ssh root@http://203.194.114.176 ...
                     '''
                 }
             }
