@@ -23,12 +23,16 @@ pipeline{
                 '''
             }
         }
-        sshagent(credentials: ['vps-ssh-key']) {
-            sh '''
-                [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
-                ssh-keyscan -t rsa,dsa example.com >> ~/.ssh/jenkins-deploy-key
-                ssh user@example.com ...
-            '''
+        stage('Coba Credential Key') {
+            steps {
+                sshagent(credentials: ['vps-ssh-key']) {
+                    sh '''
+                        [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
+                        ssh-keyscan -t rsa,dsa example.com >> ~/.ssh/jenkins-deploy-key
+                        ssh user@example.com ...
+                    '''
+                }
+            }
         }
     }
 }
