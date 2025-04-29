@@ -26,7 +26,7 @@ pipeline{
             steps {
                 sshagent(credentials: ['vps-ssh-key']) {
                     sh """
-                        ssh -o StrictHostKeyChecking=no root@203.194.114.176 "
+                        ssh-copy-id -i ~/.ssh/jenkins-deploy-key.pub root@203.194.114.176 "
                         npm install --production
                         pm2 restart ecosystem.config.cjs || 
                             pm2 start ecosystem.config.cjs
