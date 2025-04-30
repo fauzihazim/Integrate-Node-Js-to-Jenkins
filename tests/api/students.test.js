@@ -1,7 +1,6 @@
 import request from 'supertest';
-import app from '../../index.js';
 
-const baseUrl = 'http://localhost:3000/';
+const baseUrl = 'http://localhost:3000';
 
 describe('Student API', () => {
   // Jest's test() + Supertest's request()
@@ -20,7 +19,7 @@ describe('Student API', () => {
   // });
 
   it('should return a list of students with status success', async () => {
-    const res = await request(baseUrl).get('getStudents');
+    const res = await request(baseUrl).get('/getStudents');
     expect(res.status).toBe(200);
     expect(res.body.status).toBe('success');
     expect(Array.isArray(res.body.data)).toBe(true);
@@ -47,25 +46,22 @@ describe('Student API', () => {
     });
   });
 
+  test('POST /students creates new student', async () => {
+    const res = await request(baseUrl)
+    .post('/addStudent')
+    .send({ name: "Dian", subject: "Ipa", grade: 88 })
+    expect(res.status).toBe(201);
+    expect(res.body.status).toBe('success');
 
-  // test('GET /getStudents returns students', async () => {
-  //   const res = await request(baseUrl)
-  //     .get('/getStudents')
-  //     .expect(200);
-
-  //   // Jest assertions
-  //   expect(res.body).toEqual({
-  //     status: 'success',
-  //     students: [
-  //       { name: 'student 1', grade: 70 }
-  //     ]
-  //   });
-  // });
-
-  // test('POST /students creates new student', async () => {
-  //   await request(baseUrl)
-  //     .post('/students')
-  //     .send({ name: 'student 2', grade: 85 })
-  //     .expect(201);
-  // });
+    // Then use Jest assertions
+    expect(res.body).toMatchObject({
+      status: "success",
+      data: expect.objectContaining({
+        id: expect.any(Number),
+        name: "Dian",
+        subject: "Ipa",
+        grade: 88
+      })
+    });
+  });
 });
